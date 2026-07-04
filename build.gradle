@@ -1,11 +1,26 @@
 buildscript {
     repositories {
+    mavenCentral()
+    mavenLocal()
+    // Add this line right here so Gradle can find VulkanMod:
+    maven { url "https://maven.modrinth.com" }
+}
+
         mavenCentral()
         gradlePluginPortal()
         maven { url 'https://jitpack.io' }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    
+    // ... [Keep all other existing modImplementation lines here] ...
+
+    // Add this line at the bottom of the dependencies block:
+    modCompileOnly "maven.modrinth:vulkanmod:0.6.8+1.21.1"
+}
         classpath("com.gradleup.shadow:com.gradleup.shadow.gradle.plugin:9.3.0")
     }
 }
